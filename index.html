@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>视频保持原始比例播放</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            /* 页面居中显示视频，避免贴边 */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+        /* 视频容器：限制最大尺寸，不超出屏幕 */
+        .video-container {
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        /* 核心：按原始比例显示，不拉伸 */
+        #fullscreen-video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .sound-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video 
+            id="fullscreen-video"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="auto"
+        >
+            <source src="./6.mp4" type="video/mp4">
+            浏览器不支持HTML5视频播放！
+        </video>
+    </div>
+
+    <button class="sound-btn" onclick="toggleSound()">点击开启声音</button>
+
+    <script>
+        function toggleSound() {
+            const video = document.getElementById('fullscreen-video');
+            video.muted = !video.muted;
+            this.innerText = video.muted ? '点击开启声音' : '点击关闭声音';
+        }
+        document.getElementById('fullscreen-video').onclick = toggleSound;
+    </script>
+</body>
+</html>
